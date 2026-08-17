@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Definições — Siglas e Conceitos</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        overflow: hidden;
+    }
+    
+    .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+    }
+    
+    /* Header with gradient */
+    .header-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1280px;
+        height: 8px;
+        background: linear-gradient(90deg, #063B6B 0%, #F47B20 100%);
+    }
+    
+    /* Top navigation bar */
+    .top-bar {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 1280px;
+        height: 60px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 60px;
+    }
+    
+    .page-title {
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .page-title i {
+        color: #F47B20;
+    }
+    
+    .slide-number {
+        width: 40px;
+        height: 40px;
+        background: #F47B20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    
+    /* Main content area */
+    .main-content {
+        position: absolute;
+        top: 90px;
+        left: 60px;
+        width: 1160px;
+        height: 570px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: #063B6B;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .section-title i {
+        color: #F47B20;
+    }
+    
+    /* Two columns layout */
+    .columns-container {
+        display: flex;
+        gap: 40px;
+        height: 500px;
+    }
+    
+    .left-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .right-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Card styling */
+    .card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 24px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #F47B20;
+    }
+    
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .card-icon {
+        width: 44px;
+        height: 44px;
+        background: #f0f4f8;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #063B6B;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    
+    .card-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: #063B6B;
+    }
+    
+    /* Siglas grid */
+    .siglas-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 8px;
+    }
+    
+    .sigla-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        height: 56px;
+    }
+    
+    .sigla-code {
+        font-weight: 700;
+        color: #063B6B;
+        font-size: 15px;
+        min-width: 45px;
+    }
+    
+    .sigla-desc {
+        font-size: 13px;
+        color: #555;
+        flex: 1;
+        line-height: 1.2;
+    }
+    
+    /* Conceitos list */
+    .conceitos-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .conceito-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 12px;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 3px solid #F47B20;
+    }
+    
+    .conceito-icon {
+        width: 34px;
+        height: 34px;
+        background: #fff3e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #F47B20;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    
+    .conceito-content {
+        flex: 1;
+    }
+    
+    .conceito-title {
+        font-weight: 600;
+        color: #063B6B;
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+    
+    .conceito-desc {
+        font-size: 13px;
+        color: #555;
+        line-height: 1.4;
+    }
+    
+    /* Footer */
+    .footer-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 1280px;
+        height: 45px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-text {
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header Bar -->
+<div class="header-bar"></div>
+<!-- Top Bar -->
+<div class="top-bar">
+<div class="page-title">
+<i class="fas fa-book"></i>
+<span>Definições — Siglas e Conceitos</span>
+</div>
+<div class="slide-number">03</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="section-title">
+<i class="fas fa-graduation-cap"></i>
+            Definições e Terminologia
+        </div>
+<div class="columns-container">
+<!-- Left Column: Siglas & Info -->
+<div class="left-column">
+<div class="card" style="height: 310px;">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-list-ul"></i>
+</div>
+<div class="card-title">Siglas</div>
+</div>
+<div class="siglas-grid">
+<div class="sigla-item">
+<div class="sigla-code">AAS</div>
+<div class="sigla-desc">Agente de Atendimento e Segurança</div>
+</div>
+<div class="sigla-item">
+<div class="sigla-code">CCO</div>
+<div class="sigla-desc">Centro de Controle Operacional</div>
+</div>
+<div class="sigla-item">
+<div class="sigla-code">CCT</div>
+<div class="sigla-desc">Console de Controle de Tráfego</div>
+</div>
+<div class="sigla-item">
+<div class="sigla-code">OPT</div>
+<div class="sigla-desc">Operador de Trem</div>
+</div>
+<div class="sigla-item">
+<div class="sigla-code">RDS</div>
+<div class="sigla-desc">Relatório Diário da SSO</div>
+</div>
+<div class="sigla-item">
+<div class="sigla-code">TCM</div>
+<div class="sigla-desc">Técnico de Manutenção</div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top: 0; flex-grow: 1;">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-info-circle"></i>
+</div>
+<div class="card-title">Informações Complementares</div>
+</div>
+<p style="font-size: 14px; color: #555; line-height: 1.6;">
+                        Todas as siglas devem ser utilizadas conforme definido neste documento para garantir a padronização da comunicação operacional entre as equipes.
+                    </p>
+</div>
+</div>
+<!-- Right Column: Conceitos -->
+<div class="right-column">
+<div class="card" style="flex-grow: 1; margin-bottom: 0;">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-lightbulb"></i>
+</div>
+<div class="card-title">Conceitos</div>
+</div>
+<div class="conceitos-list">
+<div class="conceito-item">
+<div class="conceito-icon"><i class="fas fa-wifi"></i></div>
+<div class="conceito-content">
+<div class="conceito-title">Falha de comunicação via rádio</div>
+<div class="conceito-desc">Impossibilidade de comunicação entre CCT e operador via rádio operacional.</div>
+</div>
+</div>
+<div class="conceito-item">
+<div class="conceito-icon"><i class="fas fa-project-diagram"></i></div>
+<div class="conceito-content">
+<div class="conceito-title">Ponte de comunicação</div>
+<div class="conceito-desc">Intermediação realizada por outro trem, locomotiva, veículo ferroviário ou estação.</div>
+</div>
+</div>
+<div class="conceito-item">
+<div class="conceito-icon"><i class="fas fa-phone-alt"></i></div>
+<div class="conceito-content">
+<div class="conceito-title">Meio alternativo</div>
+<div class="conceito-desc">Telefone fixo, celular corporativo ou rádio portátil.</div>
+</div>
+</div>
+<div class="conceito-item">
+<div class="conceito-icon"><i class="fas fa-cogs"></i></div>
+<div class="conceito-content">
+<div class="conceito-title">Conveniência operacional</div>
+<div class="conceito-desc">Definição do CCT visando segurança, continuidade e menor impacto à operação.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="footer-bar">
+<div class="footer-text">SEGURANÇA • COMUNICAÇÃO • CONFIANÇA • OPERAÇÃO</div>
+</div>
+</div>
+</body>
+</html>
