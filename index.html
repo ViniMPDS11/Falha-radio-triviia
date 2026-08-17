@@ -85,7 +85,7 @@
       max-width: 1280px;
       aspect-ratio: 16 / 9;
       border-radius: clamp(12px, 1.6vw, 24px);
-      overflow: hidden;
+      overflow: visible;
       background: #fff;
       box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.45),
@@ -101,6 +101,8 @@
       height: 720px;
       transform: translate(-50%, -50%) scale(var(--slide-scale, 1));
       transform-origin: center center;
+      overflow: hidden;
+      border-radius: inherit;
       background: #fff;
     }
 
@@ -116,7 +118,7 @@
       position: absolute;
       z-index: 4;
       right: clamp(8px, 1.4vw, 18px);
-      bottom: clamp(8px, 1.4vw, 18px);
+      bottom: clamp(-58px, -4.2vw, -48px);
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -127,7 +129,7 @@
       color: rgba(255, 255, 255, 0.52);
       cursor: pointer;
       font: 700 clamp(0.74rem, 1vw, 0.9rem)/1 "Segoe UI", Roboto, Arial, sans-serif;
-      opacity: 0.24;
+      opacity: 0.78;
       transition: opacity 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
       backdrop-filter: blur(8px);
     }
@@ -147,17 +149,17 @@
     .nav-button {
       position: absolute;
       z-index: 3;
-      top: 50%;
+      top: calc(100% + 16px);
       width: clamp(34px, 4.2vw, 54px);
       height: clamp(54px, 8vw, 86px);
-      transform: translateY(-50%);
+      transform: translateY(0);
       border: 0;
       border-radius: 999px;
       background: rgba(3, 7, 13, 0.18);
       color: rgba(255, 255, 255, 0.44);
       cursor: pointer;
       font-size: clamp(1.4rem, 3vw, 2.3rem);
-      opacity: 0.22;
+      opacity: 0.78;
       transition: opacity 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
       backdrop-filter: blur(8px);
     }
@@ -169,7 +171,7 @@
       background: rgba(6, 59, 107, 0.72);
       outline: 2px solid rgba(244, 123, 32, 0.7);
       outline-offset: 3px;
-      transform: translateY(-50%) scale(1.04);
+      transform: translateY(0) scale(1.04);
     }
 
     .nav-button[disabled] {
@@ -177,8 +179,60 @@
       opacity: 0.06;
     }
 
-    .nav-button.prev { left: clamp(4px, 1vw, 14px); }
-    .nav-button.next { right: clamp(4px, 1vw, 14px); }
+    .nav-button.prev { left: calc(50% - 76px); }
+    .nav-button.next { right: calc(50% - 76px); }
+
+    .stage:fullscreen,
+    .stage.is-expanded {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      aspect-ratio: auto;
+      border-radius: 0;
+      background: #03070d;
+      box-shadow: none;
+    }
+
+    .stage.is-expanded {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+    }
+
+    .stage:fullscreen .nav-button,
+    .stage.is-expanded .nav-button {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      opacity: 0.22;
+    }
+
+    .stage:fullscreen .nav-button:hover,
+    .stage:fullscreen .nav-button:focus-visible,
+    .stage.is-expanded .nav-button:hover,
+    .stage.is-expanded .nav-button:focus-visible {
+      transform: translateY(-50%) scale(1.04);
+    }
+
+    .stage:fullscreen .nav-button.prev,
+    .stage.is-expanded .nav-button.prev { left: clamp(4px, 1vw, 14px); }
+    .stage:fullscreen .nav-button.next,
+    .stage.is-expanded .nav-button.next { right: clamp(4px, 1vw, 14px); }
+
+    .stage:fullscreen .fullscreen-button,
+    .stage.is-expanded .fullscreen-button {
+      right: clamp(8px, 1.4vw, 18px);
+      bottom: clamp(8px, 1.4vw, 18px);
+      opacity: 0.24;
+      transform: none;
+    }
+
+    .stage:fullscreen .fullscreen-button:hover,
+    .stage:fullscreen .fullscreen-button:focus-visible,
+    .stage.is-expanded .fullscreen-button:hover,
+    .stage.is-expanded .fullscreen-button:focus-visible {
+      transform: translateY(-1px);
+    }
 
     .progress {
       width: min(420px, 45vw);
@@ -209,17 +263,17 @@
       .progress { order: 3; width: 100%; }
 
       .nav-button {
-        top: 50%;
+        top: calc(100% + 12px);
         bottom: auto;
-        height: 46px;
-        width: 46px;
-        font-size: 1.65rem;
-        opacity: 0.18;
+        height: 44px;
+        width: 44px;
+        font-size: 1.55rem;
+        opacity: 0.78;
       }
 
       .fullscreen-button {
         right: 50%;
-        bottom: 6px;
+        bottom: -54px;
         transform: translateX(50%);
         padding: 9px 11px;
       }
@@ -232,6 +286,35 @@
       .nav-button:hover,
       .nav-button:focus-visible {
         transform: scale(1.04);
+      }
+
+      .stage:fullscreen .nav-button,
+    .stage.is-expanded .nav-button {
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.18;
+      }
+
+      .stage:fullscreen .nav-button:hover,
+      .stage:fullscreen .nav-button:focus-visible,
+      .stage.is-expanded .nav-button:hover,
+      .stage.is-expanded .nav-button:focus-visible {
+        transform: translateY(-50%) scale(1.04);
+      }
+
+      .stage:fullscreen .fullscreen-button,
+      .stage.is-expanded .fullscreen-button {
+        right: 50%;
+        bottom: 8px;
+        transform: translateX(50%);
+        opacity: 0.24;
+      }
+
+      .stage:fullscreen .fullscreen-button:hover,
+      .stage:fullscreen .fullscreen-button:focus-visible,
+      .stage.is-expanded .fullscreen-button:hover,
+      .stage.is-expanded .fullscreen-button:focus-visible {
+        transform: translateX(50%) translateY(-1px);
       }
     }
   </style>
@@ -293,18 +376,43 @@
     }
 
     function updateFullscreenLabel() {
-      const isFullscreen = document.fullscreenElement === stage;
+      const isFullscreen = getFullscreenElement() === stage || stage.classList.contains('is-expanded');
       fullscreenBtn.setAttribute('aria-label', isFullscreen ? 'Sair da tela cheia' : 'Abrir apresentação em tela cheia');
       fullscreenBtn.querySelector('.fullscreen-label').textContent = isFullscreen ? 'Sair' : 'Tela cheia';
     }
 
-    async function toggleFullscreen() {
-      if (document.fullscreenElement === stage) {
-        await document.exitFullscreen();
-        return;
-      }
+    function getFullscreenElement() {
+      return document.fullscreenElement || document.webkitFullscreenElement || null;
+    }
 
-      await stage.requestFullscreen();
+    function requestStageFullscreen() {
+      if (stage.requestFullscreen) return stage.requestFullscreen();
+      if (stage.webkitRequestFullscreen) return stage.webkitRequestFullscreen();
+      return Promise.reject(new Error('Fullscreen API indisponível neste navegador.'));
+    }
+
+    function exitStageFullscreen() {
+      if (document.exitFullscreen) return document.exitFullscreen();
+      if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+      return Promise.reject(new Error('Fullscreen API indisponível neste navegador.'));
+    }
+
+    async function toggleFullscreen() {
+      try {
+        if (getFullscreenElement()) {
+          await exitStageFullscreen();
+        } else if (stage.classList.contains('is-expanded')) {
+          stage.classList.remove('is-expanded');
+        } else {
+          await requestStageFullscreen();
+        }
+      } catch (error) {
+        stage.classList.toggle('is-expanded');
+        console.warn(`${error.message} Usando modo expandido como alternativa.`);
+      } finally {
+        updateFullscreenLabel();
+        resizeSlide();
+      }
     }
 
     function nextSlide() { showSlide(current + 1); }
@@ -314,12 +422,22 @@
     nextBtn.addEventListener('click', nextSlide);
     fullscreenBtn.addEventListener('click', toggleFullscreen);
     window.addEventListener('resize', resizeSlide);
-    document.addEventListener('fullscreenchange', () => {
+    function handleFullscreenChange() {
       updateFullscreenLabel();
       resizeSlide();
-    });
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 
     window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && stage.classList.contains('is-expanded')) {
+        stage.classList.remove('is-expanded');
+        updateFullscreenLabel();
+        resizeSlide();
+        return;
+      }
+
       if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
         event.preventDefault();
         nextSlide();
