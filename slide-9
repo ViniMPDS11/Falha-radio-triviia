@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Obrigações por Função</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        overflow: hidden;
+    }
+    
+    .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+    }
+    
+    /* Header with gradient */
+    .header-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1280px;
+        height: 8px;
+        background: linear-gradient(90deg, #063B6B 0%, #F47B20 100%);
+    }
+    
+    /* Top navigation bar */
+    .top-bar {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 1280px;
+        height: 60px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 60px;
+    }
+    
+    .page-title {
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .page-title i {
+        color: #F47B20;
+    }
+    
+    .slide-number {
+        width: 40px;
+        height: 40px;
+        background: #F47B20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    
+    /* Main content area */
+    .main-content {
+        position: absolute;
+        top: 90px;
+        left: 60px;
+        width: 1160px;
+        height: 570px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #063B6B;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .section-title i {
+        color: #F47B20;
+    }
+    
+    /* Four panels layout */
+    .panels-container {
+        display: flex;
+        gap: 20px;
+        height: 520px; /* Increased to reduce bottom empty space */
+    }
+    
+    .panel {
+        flex: 1;
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .panel-header {
+        background: #063B6B;
+        color: white;
+        padding: 18px 16px; /* Increased padding */
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .panel-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+    
+    .panel-title {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    
+    .panel-subtitle {
+        font-size: 12px;
+        opacity: 0.9;
+    }
+    
+    .panel-content {
+        flex: 1;
+        padding: 20px 16px; /* Increased padding */
+        display: flex;
+        flex-direction: column;
+        gap: 16px; /* Increased gap */
+    }
+    
+    .obligation-item {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 14px; /* Slightly increased */
+        border-left: 3px solid #F47B20;
+    }
+    
+    .obligation-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #063B6B;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .obligation-title i {
+        color: #F47B20;
+        font-size: 12px;
+    }
+    
+    .obligation-desc {
+        font-size: 13px;
+        color: #555;
+        line-height: 1.5; /* Increased line-height */
+    }
+    
+    .status-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: #e8f5e9;
+        border-radius: 12px;
+        font-size: 11px;
+        color: #2e7d32;
+        margin-top: 10px;
+        width: fit-content;
+    }
+    
+    /* Footer */
+    .footer-bar {
+        position: absolute;
+        top: 675px; /* Positioned near bottom edge (720-45) */
+        left: 0;
+        width: 1280px;
+        height: 45px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-text {
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header Bar -->
+<div class="header-bar"></div>
+<!-- Top Bar -->
+<div class="top-bar">
+<div class="page-title">
+<i class="fas fa-clipboard-list"></i>
+<span>Obrigações por Função</span>
+</div>
+<div class="slide-number">09</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="section-title">
+<i class="fas fa-tasks"></i>
+            Responsabilidades e Obrigações Operacionais
+        </div>
+<div class="panels-container">
+<!-- Panel 1: CCO/CCT -->
+<div class="panel">
+<div class="panel-header">
+<div class="panel-icon">
+<i class="fas fa-broadcast-tower"></i>
+</div>
+<div>
+<div class="panel-title">CCO/CCT</div>
+<div class="panel-subtitle">Centro de Controle</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-cogs"></i>
+                        Definir Conveniência Operacional
+                    </div>
+<div class="obligation-desc">
+                        Analisar situação e definir melhor estratégia para continuidade da operação
+                    </div>
+</div>
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-file-alt"></i>
+                        Registrar no RDS
+                    </div>
+<div class="obligation-desc">
+                        Documentar todas as decisões e comunicações no Relatório Diário
+                    </div>
+<div class="status-tag">
+<i class="fas fa-check-circle"></i> Obrigatório
+                    </div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Operador de Trem -->
+<div class="panel">
+<div class="panel-header">
+<div class="panel-icon">
+<i class="fas fa-train"></i>
+</div>
+<div>
+<div class="panel-title">Operador de Trem</div>
+<div class="panel-subtitle">OPT</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-phone-alt"></i>
+                        Tentar Restabelecimento
+                    </div>
+<div class="obligation-desc">
+                        Usar meios alternativos para restabelecer comunicação
+                    </div>
+</div>
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-hand-paper"></i>
+                        Manter Trem Parado
+                    </div>
+<div class="obligation-desc">
+                        Aguardar autorização segura antes de prosseguir
+                    </div>
+<div class="status-tag">
+<i class="fas fa-exclamation-circle"></i> Prioridade
+                    </div>
+</div>
+</div>
+</div>
+<!-- Panel 3: AAS -->
+<div class="panel">
+<div class="panel-header">
+<div class="panel-icon">
+<i class="fas fa-user-shield"></i>
+</div>
+<div>
+<div class="panel-title">AAS</div>
+<div class="panel-subtitle">Agente de Segurança</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-exchange-alt"></i>
+                        Atuar como Ponte
+                    </div>
+<div class="obligation-desc">
+                        Intermediar comunicação via estação quando necessário
+                    </div>
+</div>
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-shield-alt"></i>
+                        Garantir Segurança
+                    </div>
+<div class="obligation-desc">
+                        Zelar pela segurança de plataforma e acessos
+                    </div>
+<div class="status-tag">
+<i class="fas fa-check-circle"></i> Ativo
+                    </div>
+</div>
+</div>
+</div>
+<!-- Panel 4: Operador de Veículo Auxiliar -->
+<div class="panel">
+<div class="panel-header">
+<div class="panel-icon">
+<i class="fas fa-truck"></i>
+</div>
+<div>
+<div class="panel-title">Veículo Auxiliar</div>
+<div class="panel-subtitle">Rodferroviário</div>
+</div>
+</div>
+<div class="panel-content">
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-clipboard-check"></i>
+                        Seguir Determinações
+                    </div>
+<div class="obligation-desc">
+                        Cumprir instruções do CCT/CCO rigorosamente
+                    </div>
+</div>
+<div class="obligation-item">
+<div class="obligation-title">
+<i class="fas fa-hands-helping"></i>
+                        Apoiar Operação
+                    </div>
+<div class="obligation-desc">
+                        Auxiliar em condições degradadas quando autorizado
+                    </div>
+<div class="status-tag">
+<i class="fas fa-check-circle"></i> Disponível
+                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="footer-bar">
+<div class="footer-text">SEGURANÇA • COMUNICAÇÃO • CONFIANÇA • OPERAÇÃO</div>
+</div>
+</div>
+</body>
+</html>
