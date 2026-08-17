@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Responsabilidades - CCO, OPT, AAS, TCM</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        overflow: hidden;
+    }
+    
+    .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+    }
+    
+    /* Header with gradient */
+    .header-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1280px;
+        height: 8px;
+        background: linear-gradient(90deg, #063B6B 0%, #F47B20 100%);
+    }
+    
+    /* Top navigation bar */
+    .top-bar {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 1280px;
+        height: 60px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 60px;
+    }
+    
+    .page-title {
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .page-title i {
+        color: #F47B20;
+    }
+    
+    .slide-number {
+        width: 40px;
+        height: 40px;
+        background: #F47B20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    
+    /* Main content area */
+    .main-content {
+        position: absolute;
+        top: 90px;
+        left: 60px;
+        width: 1160px;
+        height: 570px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #063B6B;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .section-title i {
+        color: #F47B20;
+    }
+    
+    /* Grid layout for 4 cards */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 24px;
+        height: 500px;
+    }
+    
+    .responsibility-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .responsibility-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #F47B20;
+    }
+    
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .card-icon {
+        width: 54px;
+        height: 54px;
+        background: #f0f4f8;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #063B6B;
+        font-size: 26px;
+        flex-shrink: 0;
+    }
+    
+    .card-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #063B6B;
+    }
+    
+    .card-subtitle {
+        font-size: 13px;
+        color: #666;
+    }
+    
+    .card-content {
+        font-size: 15px;
+        color: #444;
+        line-height: 1.6;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .responsibility-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .responsibility-list li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+        font-size: 14.5px;
+    }
+    
+    .responsibility-list li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: #F47B20;
+        font-weight: bold;
+    }
+    
+    .card-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        background: #fff3e0;
+        border-radius: 12px;
+        font-size: 13px;
+        color: #F47B20;
+        margin-top: 16px;
+        width: fit-content;
+        font-weight: 600;
+    }
+    
+    /* Footer */
+    .footer-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 1280px;
+        height: 45px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-text {
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+    }
+    
+    .highlight {
+        color: #063B6B;
+        font-weight: 600;
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header Bar -->
+<div class="header-bar"></div>
+<!-- Top Bar -->
+<div class="top-bar">
+<div class="page-title">
+<i class="fas fa-users"></i>
+<span>Responsabilidades</span>
+</div>
+<div class="slide-number">04</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="section-title">
+<i class="fas fa-tasks"></i>
+            Distribuição de Responsabilidades
+        </div>
+<div class="cards-grid">
+<!-- Card 1: CCO -->
+<div class="responsibility-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-broadcast-tower"></i>
+</div>
+<div>
+<div class="card-title">CCO</div>
+<div class="card-subtitle">Centro de Controle Operacional</div>
+</div>
+</div>
+<div class="card-content">
+<ul class="responsibility-list">
+<li><span class="highlight">Avaliar condição</span> e definir conveniência operacional</li>
+<li><span class="highlight">Autorizar continuidade</span> e coordenar comunicações</li>
+<li>Emitir <span class="highlight">autorizações formais</span> para circulação</li>
+<li>Registrar <span class="highlight">decisões</span> e comunicações no RDS</li>
+</ul>
+<div class="card-badge">
+<i class="fas fa-shield-alt"></i>
+<span>Segurança</span>
+</div>
+</div>
+</div>
+<!-- Card 2: OPT -->
+<div class="responsibility-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-train"></i>
+</div>
+<div>
+<div class="card-title">OPT</div>
+<div class="card-subtitle">Operador de Trem</div>
+</div>
+</div>
+<div class="card-content">
+<ul class="responsibility-list">
+<li><span class="highlight">Tentar restabelecer</span> comunicação</li>
+<li><span class="highlight">Acionar meios alternativos</span> de comunicação</li>
+<li>Manter trem <span class="highlight">parado em caso de dúvida</span></li>
+<li>Seguir <span class="highlight">autorizações</span> do CCT/CCO</li>
+</ul>
+<div class="card-badge">
+<i class="fas fa-phone"></i>
+<span>Comunicação</span>
+</div>
+</div>
+</div>
+<!-- Card 3: AAS -->
+<div class="responsibility-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-user-shield"></i>
+</div>
+<div>
+<div class="card-title">AAS</div>
+<div class="card-subtitle">Agente de Atendimento e Segurança</div>
+</div>
+</div>
+<div class="card-content">
+<ul class="responsibility-list">
+<li><span class="highlight">Apoiar comunicação</span> por estação/meios alternativos</li>
+<li><span class="highlight">Zelar pela segurança</span> local</li>
+<li><span class="highlight">Confirmar mensagens</span> recebidas</li>
+<li>Atuar como <span class="highlight">ponte de comunicação</span></li>
+</ul>
+<div class="card-badge">
+<i class="fas fa-user-check"></i>
+<span>Segurança</span>
+</div>
+</div>
+</div>
+<!-- Card 4: TCM -->
+<div class="responsibility-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-tools"></i>
+</div>
+<div>
+<div class="card-title">TCM</div>
+<div class="card-subtitle">Técnico de Manutenção</div>
+</div>
+</div>
+<div class="card-content">
+<ul class="responsibility-list">
+<li><span class="highlight">Apoiar diagnóstico</span> dos sistemas de rádio</li>
+<li><span class="highlight">Restabelecimento</span> dos meios alternativos</li>
+<li><span class="highlight">Registrar ocorrências</span> técnicas</li>
+<li><span class="highlight">Manutenção preventiva</span> dos equipamentos</li>
+</ul>
+<div class="card-badge">
+<i class="fas fa-wrench"></i>
+<span>Manutenção</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="footer-bar">
+<div class="footer-text">SEGURANÇA • COMUNICAÇÃO • CONFIANÇA • OPERAÇÃO</div>
+</div>
+</div>
+</body>
+</html>
