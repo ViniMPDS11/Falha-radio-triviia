@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Procedimento - Visão Geral do Fluxo</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        
+        /* Header with gradient */
+        .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+            height: 8px;
+            background: linear-gradient(90deg, #063B6B 0%, #F47B20 100%);
+        }
+        
+        /* Top navigation bar */
+        .top-bar {
+            position: absolute;
+            top: 8px;
+            left: 0;
+            width: 1280px;
+            height: 60px;
+            background: #063B6B;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+        }
+        
+        .page-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .page-title i {
+            color: #F47B20;
+        }
+        
+        .slide-number {
+            width: 40px;
+            height: 40px;
+            background: #F47B20;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        /* Main content area */
+        .main-content {
+            position: absolute;
+            top: 90px;
+            left: 60px;
+            width: 1160px;
+            height: 560px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #063B6B;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title i {
+            color: #F47B20;
+        }
+        
+        /* Flowchart container */
+        .flowchart-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            height: 500px;
+        }
+        
+        /* Flowchart elements */
+        .flow-start {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #063B6B;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+        
+        .flow-start i {
+            font-size: 20px;
+            color: #F47B20;
+        }
+        
+        .arrow-down {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 50px;
+            background: #666;
+        }
+        
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #666;
+        }
+        
+        .decision-diamond {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 140px;
+            background: white;
+            border: 3px solid #F47B20;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+        
+        .decision-title {
+            font-weight: 700;
+            color: #063B6B;
+            font-size: 17px;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        
+        .decision-text {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.3;
+        }
+        
+        .decision-icon {
+            font-size: 26px;
+            color: #F47B20;
+            margin-bottom: 6px;
+        }
+        
+        /* YES/NO paths */
+        .path-container {
+            position: absolute;
+            top: 295px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 120px;
+        }
+        
+        .path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .path-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .path-yes {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #4caf50;
+        }
+        
+        .path-no {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 2px solid #ff9800;
+        }
+        
+        .path-content {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            width: 300px;
+            min-height: 160px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .path-title {
+            font-weight: 700;
+            color: #063B6B;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .path-steps {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            list-style: none;
+        }
+        
+        .path-steps li {
+            margin-bottom: 6px;
+            padding-left: 18px;
+            position: relative;
+        }
+        
+        .path-steps li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #F47B20;
+            font-weight: bold;
+        }
+        
+        .arrow-branch {
+            position: absolute;
+            top: 270px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 420px;
+            height: 2px;
+            background: #999;
+        }
+        
+        .arrow-branch::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -5px;
+            width: 12px;
+            height: 12px;
+            background: #4caf50;
+            border-radius: 50%;
+        }
+        
+        .arrow-branch::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -5px;
+            width: 12px;
+            height: 12px;
+            background: #ff9800;
+            border-radius: 50%;
+        }
+        
+        /* Footer */
+        .footer-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 1280px;
+            height: 45px;
+            background: #063B6B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-text {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header Bar -->
+<div class="header-bar"></div>
+<!-- Top Bar -->
+<div class="top-bar">
+<div class="page-title">
+<i class="fas fa-sitemap"></i>
+<span>Procedimento - Visão Geral do Fluxo</span>
+</div>
+<div class="slide-number">05</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="section-title">
+<i class="fas fa-project-diagram"></i>
+                Fluxo de Decisão - Falha de Comunicação via Rádio
+            </div>
+<div class="flowchart-container">
+<!-- Start -->
+<div class="flow-start">
+<i class="fas fa-broadcast-tower"></i>
+                    Falha de comunicação via rádio detectada
+                </div>
+<!-- Arrow down -->
+<div class="arrow-down"></div>
+<!-- Decision Diamond -->
+<div class="decision-diamond">
+<div class="decision-icon">
+<i class="fas fa-question-circle"></i>
+</div>
+<div class="decision-title">É possível restabelecer a comunicação?</div>
+<div class="decision-text">Avaliar disponibilidade de meios alternativos</div>
+</div>
+<!-- Branch arrows -->
+<div class="arrow-branch"></div>
+<!-- Path Container -->
+<div class="path-container">
+<!-- YES Path -->
+<div class="path">
+<div class="path-header path-yes">
+<i class="fas fa-check-circle"></i>
+                            SIM
+                        </div>
+<div class="path-content">
+<div class="path-title">
+<i class="fas fa-route" style="color: #4caf50;"></i>
+                                Caminho de Normalização
+                            </div>
+<ul class="path-steps">
+<li>Tentar meio alternativo</li>
+<li>Comunicação restabelecida</li>
+<li>Avaliação CCT/CCO</li>
+<li>Autorização de continuidade</li>
+</ul>
+</div>
+</div>
+<!-- NO Path -->
+<div class="path">
+<div class="path-header path-no">
+<i class="fas fa-times-circle"></i>
+                            NÃO
+                        </div>
+<div class="path-content">
+<div class="path-title">
+<i class="fas fa-exclamation-triangle" style="color: #ff9800;"></i>
+                                Condição Degradada
+                            </div>
+<ul class="path-steps">
+<li>Permanecer parado</li>
+<li>Acionar ponte de comunicação</li>
+<li>Avaliação CCT/CCO</li>
+<li>Circulação em condição degradada</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="footer-bar">
+<div class="footer-text">SEGURANÇA • COMUNICAÇÃO • CONFIANÇA • OPERAÇÃO</div>
+</div>
+</div>
+</body>
+</html>
