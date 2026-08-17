@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diretrizes Gerais</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        overflow: hidden;
+    }
+    
+    .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+    }
+    
+    /* Header with gradient */
+    .header-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1280px;
+        height: 8px;
+        background: linear-gradient(90deg, #063B6B 0%, #F47B20 100%);
+    }
+    
+    /* Top navigation bar */
+    .top-bar {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 1280px;
+        height: 60px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 60px;
+    }
+    
+    .page-title {
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .page-title i {
+        color: #F47B20;
+    }
+    
+    .slide-number {
+        width: 40px;
+        height: 40px;
+        background: #F47B20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    
+    /* Main content area */
+    .main-content {
+        position: absolute;
+        top: 90px;
+        left: 60px;
+        width: 1160px;
+        height: 570px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #063B6B;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .section-title i {
+        color: #F47B20;
+    }
+    
+    /* Guidelines grid */
+    .guidelines-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+        height: 450px;
+    }
+    
+    .guideline-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .guideline-card:hover {
+        border-color: #F47B20;
+        box-shadow: 0 6px 16px rgba(244, 123, 32, 0.1);
+    }
+    
+    .guideline-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #F47B20;
+    }
+    
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .card-icon {
+        width: 44px;
+        height: 44px;
+        background: #f0f4f8;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #063B6B;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    
+    .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #063B6B;
+        line-height: 1.3;
+    }
+    
+    .card-content {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+        flex: 1;
+    }
+    
+    .card-footer {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: #F47B20;
+    }
+    
+    /* Status indicator */
+    .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: #e8f5e9;
+        border-radius: 12px;
+        font-size: 11px;
+        color: #2e7d32;
+    }
+    
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        background: #4caf50;
+        border-radius: 50%;
+    }
+    
+    /* Footer */
+    .footer-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 1280px;
+        height: 45px;
+        background: #063B6B;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-text {
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+    }
+    
+    .highlight {
+        color: #063B6B;
+        font-weight: 600;
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header Bar -->
+<div class="header-bar"></div>
+<!-- Top Bar -->
+<div class="top-bar">
+<div class="page-title">
+<i class="fas fa-clipboard-list"></i>
+<span>Diretrizes Gerais</span>
+</div>
+<div class="slide-number">08</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="section-title">
+<i class="fas fa-list-check"></i>
+            Princípios e Diretrizes de Operação
+        </div>
+<div class="guidelines-grid">
+<!-- Card 1: Segurança em primeiro lugar -->
+<div class="guideline-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-shield-alt"></i>
+</div>
+<div class="card-title">Segurança em primeiro lugar</div>
+</div>
+<div class="card-content">
+                Priorizar a segurança em todas as operações ferroviárias. <span class="highlight">A segurança é a prioridade absoluta</span> em todas as situações de falha de comunicação.
+            </div>
+<div class="card-footer">
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span>Prioridade Alta</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Permanecer parado em caso de dúvida -->
+<div class="guideline-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-hand-paper"></i>
+</div>
+<div class="card-title">Permanecer parado em caso de dúvida</div>
+</div>
+<div class="card-content">
+                Em situações de dúvida, <span class="highlight">manter o trem parado</span> até que a comunicação seja restabelecida ou autorização seja obtida.
+            </div>
+<div class="card-footer">
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span>Procedimento Padrão</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Interromper circulação -->
+<div class="guideline-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-stop-circle"></i>
+</div>
+<div class="card-title">Interromper circulação sem comunicação</div>
+</div>
+<div class="card-content">
+<span class="highlight">Interromper circulação</span> quando não houver comunicação ou meio alternativo disponível.
+            </div>
+<div class="card-footer">
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span>Obrigatório</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Reavaliação contínua -->
+<div class="guideline-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-sync-alt"></i>
+</div>
+<div class="card-title">Reavaliação contínua do CCT</div>
+</div>
+<div class="card-content">
+                O CCT deve realizar <span class="highlight">reavaliação contínua</span> da situação operacional e tomar decisões adequadas.
+            </div>
+<div class="card-footer">
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span>Monitoramento</span>
+</div>
+</div>
+</div>
+<!-- Card 5: Comunicação clara -->
+<div class="guideline-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-comments"></i>
+</div>
+<div class="card-title">Comunicação clara e confirmação</div>
+</div>
+<div class="card-content">
+                Manter <span class="highlight">comunicação clara</span> e obter confirmação em todas as etapas do procedimento.
+            </div>
+<div class="card-footer">
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span>Essencial</span>
+</div>
+</div>
+</div>
+<!-- Card 6: Retomada após restabelecimento -->
+<div class="guideline-card">
+<div class="card-header">
+<div class="card-icon">
+<i class="fas fa-play-circle"></i>
+</div>
+<div class="card-title">Retomada após restabelecimento</div>
+</div>
+<div class="card-content">
+<span class="highlight">Retomada somente após</span> o restabelecimento completo da comunicação.
+            </div>
+<div class="card-footer">
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span>Condição para Retomada</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="footer-bar">
+<div class="footer-text">SEGURANÇA • COMUNICAÇÃO • CONFIANÇA • OPERAÇÃO</div>
+</div>
+</div>
+</body>
+</html>
