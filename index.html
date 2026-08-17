@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Falha de Comunicação via Rádio • Apresentação</title>
+  <style>
+    :root {
+      --azul: #063b6b;
+      --laranja: #f47b20;
+      --fundo: #071523;
+      --texto: #eef6ff;
+      --slide-w: 1280;
+      --slide-h: 720;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(244, 123, 32, 0.22), transparent 30%),
+        radial-gradient(circle at 85% 15%, rgba(6, 59, 107, 0.38), transparent 34%),
+        linear-gradient(135deg, #03070d 0%, var(--fundo) 50%, #0c2740 100%);
+      color: var(--texto);
+    }
+
+    .deck {
+      min-height: 100%;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: clamp(8px, 1.4vw, 18px);
+      padding: clamp(10px, 2vw, 28px);
+    }
+
+    .deck-header,
+    .deck-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      opacity: 0.92;
+      user-select: none;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 13px;
+      height: 34px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--laranja), #ffb26d);
+      box-shadow: 0 0 28px rgba(244, 123, 32, 0.55);
+    }
+
+    .hint,
+    .counter {
+      font-size: clamp(0.76rem, 1.2vw, 0.95rem);
+      color: rgba(238, 246, 255, 0.72);
+    }
+
+    .stage-shell {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .stage {
+      position: relative;
+      width: min(100%, calc((100vh - 132px) * 16 / 9));
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      border-radius: clamp(12px, 1.6vw, 24px);
+      overflow: hidden;
+      background: #fff;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.14),
+        inset 0 0 0 1px rgba(6, 59, 107, 0.08);
+    }
+
+    .stage iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+
+    .nav-button {
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      width: clamp(34px, 4.2vw, 54px);
+      height: clamp(54px, 8vw, 86px);
+      transform: translateY(-50%);
+      border: 0;
+      border-radius: 999px;
+      background: rgba(3, 7, 13, 0.18);
+      color: rgba(255, 255, 255, 0.44);
+      cursor: pointer;
+      font-size: clamp(1.4rem, 3vw, 2.3rem);
+      opacity: 0.22;
+      transition: opacity 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-button:hover,
+    .nav-button:focus-visible {
+      opacity: 1;
+      color: #fff;
+      background: rgba(6, 59, 107, 0.72);
+      outline: 2px solid rgba(244, 123, 32, 0.7);
+      outline-offset: 3px;
+      transform: translateY(-50%) scale(1.04);
+    }
+
+    .nav-button[disabled] {
+      pointer-events: none;
+      opacity: 0.06;
+    }
+
+    .nav-button.prev { left: clamp(4px, 1vw, 14px); }
+    .nav-button.next { right: clamp(4px, 1vw, 14px); }
+
+    .progress {
+      width: min(420px, 45vw);
+      height: 6px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .progress-bar {
+      width: 10%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--azul), var(--laranja));
+      transition: width 220ms ease;
+    }
+
+    @media (max-width: 720px) {
+      .deck {
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        padding: 10px;
+      }
+
+      .deck-header { align-items: flex-start; }
+      .hint { display: none; }
+      .stage { width: 100%; }
+      .deck-footer { flex-wrap: wrap; justify-content: center; }
+      .progress { order: 3; width: 100%; }
+
+      .nav-button {
+        top: auto;
+        bottom: 8px;
+        height: 46px;
+        width: 46px;
+        font-size: 1.65rem;
+        opacity: 0.18;
+      }
+
+      .nav-button:hover,
+      .nav-button:focus-visible {
+        transform: scale(1.04);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Apresentação sobre falha de comunicação via rádio">
+    <header class="deck-header">
+      <div class="brand"><span class="brand-mark"></span> Falha de Comunicação via Rádio</div>
+      <div class="hint">Use ← → no teclado ou toque nas setas discretas sobre o slide</div>
+    </header>
+
+    <section class="stage-shell">
+      <div class="stage" aria-live="polite">
+        <iframe id="slideFrame" title="Slide 1" src="slide-1.html"></iframe>
+        <button class="nav-button prev" id="prevBtn" type="button" aria-label="Slide anterior">‹</button>
+        <button class="nav-button next" id="nextBtn" type="button" aria-label="Próximo slide">›</button>
+      </div>
+    </section>
+
+    <footer class="deck-footer">
+      <span class="counter" id="counter">Slide 1 de 10</span>
+      <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+      <span class="hint">Compatível com desktop, tablet e celular</span>
+    </footer>
+  </main>
+
+  <script>
+    const slides = Array.from({ length: 10 }, (_, index) => `slide-${index + 1}.html`);
+    let current = 0;
+
+    const frame = document.getElementById('slideFrame');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('counter');
+    const progressBar = document.getElementById('progressBar');
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      frame.src = slides[current];
+      frame.title = `Slide ${current + 1}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      counter.textContent = `Slide ${current + 1} de ${slides.length}`;
+      progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+    }
+
+    function nextSlide() { showSlide(current + 1); }
+    function prevSlide() { showSlide(current - 1); }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+        event.preventDefault();
+        nextSlide();
+      }
+
+      if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+        event.preventDefault();
+        prevSlide();
+      }
+    });
+
+    let touchStartX = 0;
+    window.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (event) => {
+      const deltaX = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(deltaX) < 48) return;
+      deltaX < 0 ? nextSlide() : prevSlide();
+    }, { passive: true });
+
+    showSlide(0);
+  </script>
+</body>
+</html>
