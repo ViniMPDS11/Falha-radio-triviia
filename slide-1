@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Procedimento Operacional - Falha de Comunicação via Rádio</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        
+        .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+            height: 8px;
+            background: linear-gradient(90deg, #063B6B 0%, #F47B20 100%);
+        }
+        
+        .logo-area {
+            position: absolute;
+            top: 20px;
+            left: 1040px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #063B6B;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            color: #063B6B;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            position: absolute;
+            top: 80px;
+            left: 60px;
+            width: 1160px;
+            height: 580px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .title-section {
+            margin-bottom: 40px;
+        }
+        
+        .main-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #063B6B;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+        
+        .title-highlight {
+            color: #F47B20;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .content-grid {
+            display: flex;
+            gap: 40px;
+            flex: 1;
+        }
+        
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid #F47B20;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #063B6B;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .card-content {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .right-section {
+            width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+        
+        .train-illustration {
+            width: 400px;
+            height: 220px;
+            background: #f0f4f8;
+            border-radius: 16px;
+            position: relative;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .train-body {
+            width: 320px;
+            height: 90px;
+            background: linear-gradient(135deg, #063B6B 0%, #0B3D6E 100%);
+            border-radius: 40px 40px 10px 10px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .train-window {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 25px;
+            background: #87CEEB;
+            border-radius: 4px;
+            border: 2px solid #F47B20;
+        }
+        
+        .train-window:nth-child(2) {
+            left: 90px;
+        }
+        
+        .train-window:nth-child(3) {
+            left: 160px;
+        }
+        
+        .train-door {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            width: 40px;
+            height: 55px;
+            background: #F47B20;
+            border-radius: 4px;
+        }
+        
+        .train-wheels {
+            position: absolute;
+            bottom: -15px;
+            left: 45px;
+            display: flex;
+            gap: 80px;
+        }
+        
+        .wheel {
+            width: 32px;
+            height: 32px;
+            background: #333;
+            border-radius: 50%;
+            border: 3px solid #666;
+        }
+        
+        .radio-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 70px;
+            height: 70px;
+            background: #F47B20;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        .status-indicator {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            background: #fff3e0;
+            border-radius: 25px;
+            border: 2px solid #F47B20;
+        }
+        
+        .status-dot {
+            width: 14px;
+            height: 14px;
+            background: #F47B20;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .status-text {
+            font-size: 15px;
+            color: #063B6B;
+            font-weight: 600;
+        }
+        
+        .footer-bar {
+            position: absolute;
+            top: 680px;
+            left: 0;
+            width: 1280px;
+            height: 40px;
+            background: #063B6B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-text {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header Bar -->
+<div class="header-bar"></div>
+<!-- Logo Area -->
+<div class="logo-area">
+<div class="logo-icon">
+<i class="fas fa-train"></i>
+</div>
+<div class="logo-text">Operações Ferroviárias</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="title-section">
+<div class="main-title">
+<span class="title-highlight">PROCEDIMENTO OPERACIONAL</span><br/>
+                    FALHA DE COMUNICAÇÃO VIA RÁDIO<br/>
+                    EM OPERAÇÕES FERROVIÁRIAS
+                </div>
+<div class="subtitle">Procedimento Operacional • Circulação de trem metropolitano, locomotiva e veículo auxiliar</div>
+</div>
+<div class="content-grid">
+<!-- Left Column with Info Cards -->
+<div class="left-section">
+<div class="info-card">
+<div class="card-title">
+<i class="fas fa-bullseye" style="color: #F47B20;"></i>
+                            Objetivo
+                        </div>
+<div class="card-content">
+                            Estabelecer procedimentos para circulação de trem metropolitano, locomotiva e veículo auxiliar em situações de falha de comunicação via rádio.
+                        </div>
+</div>
+<div class="info-card">
+<div class="card-title">
+<i class="fas fa-expand" style="color: #F47B20;"></i>
+                            Abrangência
+                        </div>
+<div class="card-content">
+                            CCO, Tráfego, Manutenção e Estações
+                        </div>
+</div>
+<div class="info-card">
+<div class="card-title">
+<i class="fas fa-file-alt" style="color: #F47B20;"></i>
+                            Documentos de Referência
+                        </div>
+<div class="card-content">
+                            RDS da SSO; documentos internos aplicáveis
+                        </div>
+</div>
+</div>
+<!-- Right Column with Illustration -->
+<div class="right-section">
+<div class="train-illustration">
+<div class="train-body">
+<div class="train-window"></div>
+<div class="train-window"></div>
+<div class="train-window"></div>
+<div class="train-door"></div>
+<div class="train-wheels">
+<div class="wheel"></div>
+<div class="wheel"></div>
+</div>
+</div>
+<div class="radio-icon">
+<i class="fas fa-broadcast-tower"></i>
+</div>
+</div>
+<div class="status-indicator">
+<div class="status-dot"></div>
+<div class="status-text">Falha de Comunicação Detectada</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Bar -->
+<div class="footer-bar">
+<div class="footer-text">SEGURANÇA • COMUNICAÇÃO • CONFIANÇA • OPERAÇÃO</div>
+</div>
+</div>
+</body>
+</html>
