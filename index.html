@@ -93,14 +93,56 @@
         inset 0 0 0 1px rgba(6, 59, 107, 0.08);
     }
 
-    .stage iframe {
+    .slide-viewport {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+      top: 50%;
+      left: 50%;
+      width: 1280px;
+      height: 720px;
+      transform: translate(-50%, -50%) scale(var(--slide-scale, 1));
+      transform-origin: center center;
       background: #fff;
     }
+
+    .stage iframe {
+      width: 1280px;
+      height: 720px;
+      border: 0;
+      background: #fff;
+      display: block;
+    }
+
+    .fullscreen-button {
+      position: absolute;
+      z-index: 4;
+      right: clamp(8px, 1.4vw, 18px);
+      bottom: clamp(8px, 1.4vw, 18px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 13px;
+      background: rgba(3, 7, 13, 0.2);
+      color: rgba(255, 255, 255, 0.52);
+      cursor: pointer;
+      font: 700 clamp(0.74rem, 1vw, 0.9rem)/1 "Segoe UI", Roboto, Arial, sans-serif;
+      opacity: 0.24;
+      transition: opacity 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .fullscreen-button:hover,
+    .fullscreen-button:focus-visible {
+      opacity: 1;
+      color: #fff;
+      background: rgba(244, 123, 32, 0.78);
+      outline: 2px solid rgba(255, 255, 255, 0.72);
+      outline-offset: 3px;
+      transform: translateY(-1px);
+    }
+
+    .fullscreen-icon { font-size: 1.05rem; }
 
     .nav-button {
       position: absolute;
@@ -167,12 +209,24 @@
       .progress { order: 3; width: 100%; }
 
       .nav-button {
-        top: auto;
-        bottom: 8px;
+        top: 50%;
+        bottom: auto;
         height: 46px;
         width: 46px;
         font-size: 1.65rem;
         opacity: 0.18;
+      }
+
+      .fullscreen-button {
+        right: 50%;
+        bottom: 6px;
+        transform: translateX(50%);
+        padding: 9px 11px;
+      }
+
+      .fullscreen-button:hover,
+      .fullscreen-button:focus-visible {
+        transform: translateX(50%) translateY(-1px);
       }
 
       .nav-button:hover,
@@ -190,10 +244,16 @@
     </header>
 
     <section class="stage-shell">
-      <div class="stage" aria-live="polite">
-        <iframe id="slideFrame" title="Slide 1" src="slide-1.html"></iframe>
+      <div class="stage" id="stage" aria-live="polite">
+        <div class="slide-viewport" id="slideViewport">
+          <iframe id="slideFrame" title="Slide 1" src="slide-1.html"></iframe>
+        </div>
         <button class="nav-button prev" id="prevBtn" type="button" aria-label="Slide anterior">‹</button>
         <button class="nav-button next" id="nextBtn" type="button" aria-label="Próximo slide">›</button>
+        <button class="fullscreen-button" id="fullscreenBtn" type="button" aria-label="Abrir apresentação em tela cheia">
+          <span class="fullscreen-icon" aria-hidden="true">⛶</span>
+          <span class="fullscreen-label">Tela cheia</span>
+        </button>
       </div>
     </section>
 
@@ -208,11 +268,19 @@
     const slides = Array.from({ length: 10 }, (_, index) => `slide-${index + 1}.html`);
     let current = 0;
 
+    const stage = document.getElementById('stage');
+    const viewport = document.getElementById('slideViewport');
     const frame = document.getElementById('slideFrame');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const counter = document.getElementById('counter');
     const progressBar = document.getElementById('progressBar');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    function resizeSlide() {
+      const scale = Math.min(stage.clientWidth / 1280, stage.clientHeight / 720);
+      viewport.style.setProperty('--slide-scale', scale);
+    }
 
     function showSlide(index) {
       current = Math.max(0, Math.min(index, slides.length - 1));
@@ -224,11 +292,32 @@
       progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
     }
 
+    function updateFullscreenLabel() {
+      const isFullscreen = document.fullscreenElement === stage;
+      fullscreenBtn.setAttribute('aria-label', isFullscreen ? 'Sair da tela cheia' : 'Abrir apresentação em tela cheia');
+      fullscreenBtn.querySelector('.fullscreen-label').textContent = isFullscreen ? 'Sair' : 'Tela cheia';
+    }
+
+    async function toggleFullscreen() {
+      if (document.fullscreenElement === stage) {
+        await document.exitFullscreen();
+        return;
+      }
+
+      await stage.requestFullscreen();
+    }
+
     function nextSlide() { showSlide(current + 1); }
     function prevSlide() { showSlide(current - 1); }
 
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    window.addEventListener('resize', resizeSlide);
+    document.addEventListener('fullscreenchange', () => {
+      updateFullscreenLabel();
+      resizeSlide();
+    });
 
     window.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
@@ -253,6 +342,7 @@
       deltaX < 0 ? nextSlide() : prevSlide();
     }, { passive: true });
 
+    resizeSlide();
     showSlide(0);
   </script>
 </body>
